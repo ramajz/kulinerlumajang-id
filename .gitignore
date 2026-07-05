@@ -1,0 +1,34 @@
+# .gitignore — KulinerLumajang.id
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build output
+dist/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.log
+*.tmp
+
+# AI scratchpad
+dev-docs/temp/
+
+# Docs artifacts (only on dev branch, excluded from main)
+# ai-rules/ — kept on dev only
+# dev-docs/ — kept on dev only
+# planning/ — kept on dev only
+# reports/ — kept on dev only
