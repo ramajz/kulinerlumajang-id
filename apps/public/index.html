@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KulinerLumajang.id — Direktori Kuliner Lumajang</title>
+  <meta name="description" content="Temukan kuliner enak di Lumajang. Cari warung, restoran, dan jajanan lokal, lalu langsung chat WhatsApp penjualnya." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #E63946;
+      --red-dark: #C1121F;
+      --yellow: #FFB703;
+      --yellow-light: #FFC940;
+      --orange: #FB8500;
+      --dark: #1D3557;
+      --dark-light: #2B3A55;
+      --cream: #F8F9FA;
+      --cream-dark: #E9ECEF;
+      --white: #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(29, 53, 87, 0.08);
+      --shadow-md: 0 8px 24px rgba(29, 53, 87, 0.12);
+      --shadow-lg: 0 16px 48px rgba(29, 53, 87, 0.16);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-lg: 24px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
+
+    /* Header */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(248, 249, 250, 0.92);
+      border-bottom: 1px solid rgba(29, 53, 87, 0.08);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0; gap: 24px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 800; font-size: 22px; color: var(--red);
+      letter-spacing: -0.02em;
+    }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: grid; place-items: center;
+      background: var(--red);
+      color: white; font-family: 'Playfair Display', serif;
+      font-weight: 800; font-size: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-links { display: flex; gap: 28px; color: var(--dark-light); font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta {
+      padding: 12px 20px; border-radius: var(--radius-sm); background: var(--red);
+      color: white; font-weight: 700; font-size: 14px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    /* Hero */
+    .hero { padding: 80px 0 60px; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 999px;
+      background: var(--yellow); color: var(--dark);
+      font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.08; letter-spacing: -0.03em;
+      margin-bottom: 20px; color: var(--dark);
+    }
+    .hero p.lead {
+      font-size: 18px; color: var(--dark-light);
+      max-width: 520px; margin-bottom: 32px; line-height: 1.7;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 28px; border-radius: var(--radius-sm); font-weight: 700; font-size: 15px;
+      border: 1px solid transparent; transition: all 0.2s ease;
+    }
+    .btn-primary { background: var(--red); color: white; }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary { background: white; border-color: var(--cream-dark); color: var(--dark); }
+    .btn-secondary:hover { border-color: var(--red); color: var(--red); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 12px; color: var(--dark-light); font-size: 14px; }
+    .hero-meta span {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px;
+      background: white; border: 1px solid var(--cream-dark); border-radius: 999px;
+      font-weight: 500;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: white;
+      border: 1px solid var(--cream-dark); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg); padding: 28px;
+      position: relative; overflow: hidden;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--yellow), var(--orange));
+    }
+    .mini-search {
+      background: var(--cream); border: 1px solid var(--cream-dark); border-radius: var(--radius);
+      padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px;
+    }
+    .mini-search strong { color: var(--dark); font-size: 15px; }
+    .mini-search span { color: var(--dark-light); font-size: 14px; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+    .chip {
+      padding: 8px 14px; border-radius: 999px; background: white;
+      border: 1px solid var(--cream-dark); font-size: 13px; color: var(--dark);
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .chip:hover { border-color: var(--red); color: var(--red); }
+    .preview-list { display: grid; gap: 12px; }
+    .spot {
+      display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center;
+      background: var(--cream); border: 1px solid var(--cream-dark); border-radius: var(--radius); padding: 14px;
+      transition: all 0.2s ease;
+    }
+    .spot:hover { border-color: var(--red); box-shadow: var(--shadow-sm); }
+    .spot-img {
+      width: 56px; height: 56px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--red) 0%, var(--orange) 100%);
+      display: grid; place-items: center;
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: white;
+    }
+    .spot h3 { font-size: 15px; margin-bottom: 4px; font-weight: 600; }
+    .spot p { color: var(--dark-light); font-size: 13px; }
+    .pill-rating {
+      padding: 8px 12px; border-radius: var(--radius-sm); background: var(--yellow);
+      color: var(--dark); font-size: 12px; font-weight: 700; white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Stats */
+    .stats { padding: 16px 0 64px; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .stat {
+      background: white; border: 1px solid var(--cream-dark); border-radius: var(--radius);
+      padding: 28px; box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .stat:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .stat-number {
+      display: block; font-family: 'JetBrains Mono', monospace;
+      font-size: 32px; font-weight: 700; color: var(--red);
+      line-height: 1; margin-bottom: 10px;
+    }
+    .stat span { color: var(--dark-light); font-size: 14px; font-weight: 500; }
+
+    /* Sections */
+    .section { padding: 48px 0; }
+    .section-head { margin-bottom: 32px; }
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .section-head p { color: var(--dark-light); max-width: 600px; font-size: 16px; }
+
+    /* Features */
+    .features {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .feature {
+      background: white; border: 1px solid var(--cream-dark); border-radius: var(--radius-lg);
+      padding: 32px; box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .feature:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .feature-icon {
+      width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+      background: var(--yellow); margin-bottom: 20px;
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; color: var(--dark);
+    }
+    .feature h3 { font-size: 20px; margin-bottom: 10px; font-weight: 700; }
+    .feature p { color: var(--dark-light); font-size: 15px; line-height: 1.7; }
+
+    /* Listings */
+    .listings {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .listing {
+      background: white; border: 1px solid var(--cream-dark); border-radius: var(--radius-lg);
+      overflow: hidden; box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .listing:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .listing-top {
+      min-height: 160px; padding: 20px; display: flex; align-items: start; justify-content: space-between;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
+    }
+    .listing-badge {
+      padding: 8px 12px; border-radius: 999px; font-size: 11px; font-weight: 700;
+      background: var(--red); color: white;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .listing-initial {
+      font-family: 'Playfair Display', serif; font-weight: 800; font-size: 48px;
+      color: var(--red); opacity: 0.3;
+    }
+    .listing-body { padding: 24px; }
+    .listing-body h3 { font-size: 20px; margin-bottom: 12px; font-weight: 700; }
+    .listing-meta { color: var(--dark-light); font-size: 14px; display: grid; gap: 8px; margin-bottom: 20px; }
+    .listing-meta span { display: flex; align-items: center; gap: 8px; }
+    .listing-actions { display: flex; gap: 12px; }
+    .listing-actions .btn { flex: 1; padding: 14px 16px; font-size: 14px; }
+    .btn-wa { background: #25D366; color: white; }
+    .btn-wa:hover { filter: brightness(0.95); }
+
+    /* Owner Section */
+    .owner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      background: var(--dark);
+      color: white; padding: 40px; border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+    .owner p { color: rgba(255,255,255,0.75); line-height: 1.7; }
+    .owner-points { display: grid; gap: 12px; margin-top: 20px; }
+    .owner-points span {
+      display: inline-flex; align-items: center; gap: 12px; padding: 14px 16px;
+      border-radius: var(--radius-sm); background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-weight: 500;
+    }
+    .pricing {
+      background: rgba(255,255,255,0.06); border-radius: var(--radius); padding: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .pricing h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 4px; }
+    .pricing ul { list-style: none; display: grid; gap: 14px; margin-top: 20px; }
+    .pricing li {
+      display: flex; justify-content: space-between; gap: 16px; padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .pricing li:last-child { border-bottom: none; padding-bottom: 0; }
+    .price-tag { font-weight: 700; color: var(--yellow); font-family: 'JetBrains Mono', monospace; }
+
+    /* CTA Box */
+    .cta-box {
+      background: white; border: 1px solid var(--cream-dark); border-radius: var(--radius-lg);
+      padding: 40px; text-align: center; box-shadow: var(--shadow-sm);
+    }
+    .cta-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3vw, 32px); margin-bottom: 12px;
+    }
+    .cta-box p { color: var(--dark-light); max-width: 600px; margin: 0 auto 28px; font-size: 16px; }
+
+    /* Footer */
+    .footer {
+      padding: 40px 0 48px; color: var(--dark-light); font-size: 14px;
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+      border-top: 1px solid var(--cream-dark); padding-top: 24px;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; color: var(--red); font-size: 18px;
+    }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a:hover { color: var(--red); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-card { max-width: 480px; }
+      .features, .listings { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 48px; }
+      .container { width: min(1200px, calc(100% - 24px)); }
+      .features, .listings { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .owner { grid-template-columns: 1fr; padding: 28px; }
+      .section-head h2 { font-size: 28px; }
+      .btn { padding: 14px 22px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding-top: 32px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat { padding: 20px; }
+      .stat-number { font-size: 28px; }
+      .listing-actions { flex-direction: column; }
+      .listing-actions .btn { width: 100%; }
+      .owner { padding: 20px; }
+      .cta-box { padding: 28px 20px; }
+      .cta-box .hero-actions { flex-direction: column; }
+      .cta-box .hero-actions .btn { width: 100%; }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero > .container > div:first-child { animation: fadeInUp 0.6s ease-out; }
+    .hero-card { animation: fadeInUp 0.6s ease-out 0.2s both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero > .container > div:first-child,
+      .hero-card { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#top">
+        <span class="brand-mark">KL</span>
+        <span>KulinerLumajang.id</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#fitur">Fitur</a>
+        <a href="#contoh">Contoh Kuliner</a>
+        <a href="#pemilik">Untuk Pemilik Usaha</a>
+      </nav>
+      <a class="nav-cta" href="#daftar">Daftar Usaha</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Direktori kuliner khusus Lumajang</div>
+          <h1>Temukan kuliner enak di Lumajang, lalu langsung chat penjualnya.</h1>
+          <p class="lead">KulinerLumajang.id membantu warga dan wisatawan menemukan warung, restoran, dan jajanan lokal dengan cepat — lengkap dengan lokasi, jam buka, kisaran harga, dan tombol WhatsApp.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contoh">Lihat Contoh Kuliner</a>
+            <a class="btn btn-secondary" href="#pemilik">Saya Punya Usaha</a>
+          </div>
+          <div class="hero-meta">
+            <span>Fokus lokal Lumajang</span>
+            <span>Langsung chat ke WhatsApp</span>
+            <span>Mudah dicoba dan cepat dipakai</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="mini-search">
+            <strong>Cari kuliner</strong>
+            <span>Sate, bakso, kopi...</span>
+          </div>
+          <div class="chip-row">
+            <span class="chip">Sate</span>
+            <span class="chip">Bakso</span>
+            <span class="chip">Nasi Pecel</span>
+            <span class="chip">Kopi</span>
+          </div>
+          <div class="preview-list">
+            <div class="spot">
+              <div class="spot-img">SK</div>
+              <div>
+                <h3>Sate Pak Karso</h3>
+                <p>Jl. Ahmad Yani | Rp20-35rb | Buka 10.00-22.00</p>
+              </div>
+              <div class="pill-rating">4.8</div>
+            </div>
+            <div class="spot">
+              <div class="spot-img">ND</div>
+              <div>
+                <h3>Nasi Pecel Mbok Darmi</h3>
+                <p>Jl. PB Sudirman | Rp12-18rb | Buka pagi</p>
+              </div>
+              <div class="pill-rating">4.7</div>
+            </div>
+            <div class="spot">
+              <div class="spot-img">KT</div>
+              <div>
+                <h3>Kopi Tumpuk Lumajang</h3>
+                <p>Area kota | Tempat nongkrong | Cocok WFC</p>
+              </div>
+              <div class="pill-rating">HITS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container stats-grid">
+        <div class="stat"><span class="stat-number">3</span><span>Langkah dari cari kuliner sampai chat penjual</span></div>
+        <div class="stat"><span class="stat-number">100%</span><span>Fokus kuliner lokal, bukan direktori umum</span></div>
+        <div class="stat"><span class="stat-number">WA</span><span>Langsung chat ke WhatsApp penjual</span></div>
+        <div class="stat"><span class="stat-number">&lt;5m</span><span>Cocok untuk mulai tes market dengan sederhana</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="fitur">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Kenapa ini menarik buat warga dan UMKM?</h2>
+            <p>Bukan sekadar daftar tempat makan. Halaman ini dirancang supaya pengunjung cepat paham manfaatnya, sementara pemilik usaha langsung melihat alasan untuk ikut daftar.</p>
+          </div>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon">01</div>
+            <h3>Temukan lebih cepat</h3>
+            <p>Pengunjung bisa cari berdasarkan jenis makanan, lokasi, harga, dan rekomendasi tanpa harus scroll Instagram atau tanya grup WhatsApp.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon">02</div>
+            <h3>Langsung ke WhatsApp</h3>
+            <p>CTA utama langsung menghubungkan pembeli ke penjual. Sederhana, cocok untuk kebiasaan transaksi UMKM lokal.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon">03</div>
+            <h3>Tempat promosi UMKM</h3>
+            <p>Pemilik usaha bisa tampil gratis, lalu upgrade ke Premium atau Featured untuk visibilitas lebih tinggi saat traffic mulai masuk.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contoh">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Contoh tampilan kuliner yang bisa ditampilkan</h2>
+            <p>Untuk landing page awal, cukup tampilkan beberapa contoh listing unggulan. Nanti setelah traffic mulai masuk dan UMKM bertambah, halaman ini bisa dikembangkan menjadi direktori yang lebih lengkap.</p>
+          </div>
+        </div>
+
+        <div class="listings">
+          <article class="listing">
+            <div class="listing-top">
+              <span class="listing-badge">Featured</span>
+              <span class="listing-initial">SK</span>
+            </div>
+            <div class="listing-body">
+              <h3>Sate Sapi Pak Karso</h3>
+              <div class="listing-meta">
+                <span>Jl. Ahmad Yani No. 45</span>
+                <span>Rp20.000 - Rp35.000</span>
+                <span>10.00 - 22.00</span>
+              </div>
+              <div class="listing-actions">
+                <a class="btn btn-wa" href="#">Chat WhatsApp</a>
+                <a class="btn btn-secondary" href="#">Lihat Maps</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="listing">
+            <div class="listing-top">
+              <span class="listing-badge" style="background: var(--orange);">Premium</span>
+              <span class="listing-initial">ND</span>
+            </div>
+            <div class="listing-body">
+              <h3>Nasi Pecel Mbok Darmi</h3>
+              <div class="listing-meta">
+                <span>Jl. PB Sudirman No. 23</span>
+                <span>Rp12.000 - Rp18.000</span>
+                <span>06.00 - 14.00</span>
+              </div>
+              <div class="listing-actions">
+                <a class="btn btn-wa" href="#">Chat WhatsApp</a>
+                <a class="btn btn-secondary" href="#">Lihat Maps</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="listing">
+            <div class="listing-top">
+              <span class="listing-badge" style="background: var(--yellow); color: var(--dark);">Lagi Dicari</span>
+              <span class="listing-initial">KT</span>
+            </div>
+            <div class="listing-body">
+              <h3>Kopi Tumpuk Lumajang</h3>
+              <div class="listing-meta">
+                <span>Area kota Lumajang</span>
+                <span>Rp15.000 - Rp28.000</span>
+                <span>16.00 - 23.00</span>
+              </div>
+              <div class="listing-actions">
+                <a class="btn btn-wa" href="#">Chat WhatsApp</a>
+                <a class="btn btn-secondary" href="#">Lihat Maps</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pemilik">
+      <div class="container owner">
+        <div>
+          <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 16px;">Untuk pemilik warung dan restoran</h2>
+          <p>KulinerLumajang.id bisa jadi kanal promosi tambahan yang lebih terstruktur daripada feed sosial media biasa. Fokusnya: bantu orang menemukan usaha kamu lalu langsung menghubungi via WhatsApp.</p>
+          <div class="owner-points">
+            <span>Listing gratis untuk mulai ikut tampil</span>
+            <span>Premium badge untuk tingkatkan kepercayaan</span>
+            <span>Featured banner untuk promosi yang paling menonjol</span>
+          </div>
+        </div>
+        <div class="pricing">
+          <h3>Contoh model monetisasi</h3>
+          <ul>
+            <li><span>Free Listing</span><span class="price-tag">Mulai gratis</span></li>
+            <li><span>Premium Badge</span><span class="price-tag">Rp50rb/bulan</span></li>
+            <li><span>Featured Banner</span><span class="price-tag">Rp150rb/bulan</span></li>
+          </ul>
+          <div style="margin-top: 20px;">
+            <a class="btn btn-secondary" style="background:white; color:var(--red); width:100%; border-color: white;" href="#daftar">Saya Mau Daftar Usaha</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="daftar">
+      <div class="container cta-box">
+        <h2>Mulai dari landing page sederhana, lalu tumbuh ke direktori penuh</h2>
+        <p>Versi ini cocok untuk tahap awal: jelas, meyakinkan, dan tidak terlalu ramai. Setelah ada trafik dan beberapa UMKM bergabung, baru kita kembangkan ke halaman direktori penuh seperti mockup yang sudah kamu punya.</p>
+        <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
+          <a class="btn btn-primary" href="#">Aktifkan Landing Page</a>
+          <a class="btn btn-secondary" href="#contoh">Lihat Preview Listing</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">KulinerLumajang.id</div>
+        <div style="margin-top: 8px;">Direktori kuliner lokal untuk warga dan UMKM Lumajang.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#fitur">Fitur</a>
+        <a href="#contoh">Contoh Kuliner</a>
+        <a href="#pemilik">Untuk UMKM</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
