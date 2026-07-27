@@ -1,579 +1,528 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="jv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KulinerLumajang.id — Direktori Kuliner Lumajang</title>
-  <meta name="description" content="Temukan kuliner enak di Lumajang. Cari warung, restoran, dan jajanan lokal, lalu langsung chat WhatsApp penjualnya." />
+  <title>Kuliner Lumajang — Direktori Kuliner Wong Lumajang</title>
+  <meta name="description" content="Kumpulan kuliner enak nang Lumajang. Seng takok-takok, langsung WA penjual'e." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: #F8F9FA;
+      color: #1D3557;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== VARIABLES ===== */
     :root {
       --red: #E63946;
       --red-dark: #C1121F;
       --yellow: #FFB703;
-      --yellow-light: #FFC940;
+      --yellow-light: #FFDA6A;
       --orange: #FB8500;
       --dark: #1D3557;
       --dark-light: #2B3A55;
       --cream: #F8F9FA;
       --cream-dark: #E9ECEF;
       --white: #FFFFFF;
-      --shadow-sm: 0 2px 8px rgba(29, 53, 87, 0.08);
-      --shadow-md: 0 8px 24px rgba(29, 53, 87, 0.12);
-      --shadow-lg: 0 16px 48px rgba(29, 53, 87, 0.16);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --radius-lg: 24px;
+      --green: #25D366;
+      --shadow: 0 2px 12px rgba(29,53,87,0.08);
+      --shadow-lg: 0 8px 32px rgba(29,53,87,0.12);
+      --radius: 12px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--cream);
-      color: var(--dark);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+    /* ===== LAYOUT ===== */
+    .wrap { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
 
-    a { color: inherit; text-decoration: none; }
-    .container { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
-
-    /* Header */
+    /* ===== HEADER ===== */
     .header {
       position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(16px);
-      background: rgba(248, 249, 250, 0.92);
-      border-bottom: 1px solid rgba(29, 53, 87, 0.08);
+      background: var(--white);
+      border-bottom: 2px solid var(--cream-dark);
     }
-    .nav {
+    .header-inner {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 0; gap: 24px;
+      padding: 12px 0; gap: 16px;
     }
-    .brand {
-      display: flex; align-items: center; gap: 12px;
+    .logo {
+      display: flex; align-items: center; gap: 10px;
       font-family: 'Playfair Display', serif;
-      font-weight: 800; font-size: 22px; color: var(--red);
-      letter-spacing: -0.02em;
+      font-weight: 800; font-size: 20px; color: var(--dark);
     }
-    .brand-mark {
-      width: 44px; height: 44px; border-radius: 12px;
-      display: grid; place-items: center;
-      background: var(--red);
-      color: white; font-family: 'Playfair Display', serif;
-      font-weight: 800; font-size: 18px;
-      box-shadow: var(--shadow-sm);
-    }
-    .nav-links { display: flex; gap: 28px; color: var(--dark-light); font-size: 14px; font-weight: 500; }
-    .nav-links a:hover { color: var(--red); }
-    .nav-cta {
-      padding: 12px 20px; border-radius: var(--radius-sm); background: var(--red);
-      color: white; font-weight: 700; font-size: 14px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-    .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
-
-    /* Hero */
-    .hero { padding: 80px 0 60px; }
-    .hero-grid {
-      display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: center;
-    }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 16px; border-radius: 999px;
+    .logo-icon {
+      width: 36px; height: 36px;
       background: var(--yellow); color: var(--dark);
-      font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
-      text-transform: uppercase; margin-bottom: 20px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800;
     }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 5vw, 56px);
-      line-height: 1.08; letter-spacing: -0.03em;
-      margin-bottom: 20px; color: var(--dark);
+    .nav { display: flex; gap: 20px; align-items: center; }
+    .nav a {
+      font-size: 14px; font-weight: 500; color: var(--dark-light);
+      padding: 6px 0; border-bottom: 2px solid transparent;
+      transition: 0.2s;
     }
-    .hero p.lead {
-      font-size: 18px; color: var(--dark-light);
-      max-width: 520px; margin-bottom: 32px; line-height: 1.7;
+    .nav a:hover { color: var(--red); border-color: var(--red); }
+    .nav-btn {
+      background: var(--red); color: var(--white);
+      padding: 10px 20px; border-radius: var(--radius);
+      font-weight: 600; font-size: 14px; border: none;
+      cursor: pointer; transition: 0.2s;
     }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 16px 28px; border-radius: var(--radius-sm); font-weight: 700; font-size: 15px;
-      border: 1px solid transparent; transition: all 0.2s ease;
-    }
-    .btn-primary { background: var(--red); color: white; }
-    .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .btn-secondary { background: white; border-color: var(--cream-dark); color: var(--dark); }
-    .btn-secondary:hover { border-color: var(--red); color: var(--red); }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 12px; color: var(--dark-light); font-size: 14px; }
-    .hero-meta span {
-      display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px;
-      background: white; border: 1px solid var(--cream-dark); border-radius: 999px;
-      font-weight: 500;
-    }
+    .nav-btn:hover { background: var(--red-dark); }
 
-    /* Hero Card */
-    .hero-card {
-      background: white;
-      border: 1px solid var(--cream-dark); border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg); padding: 28px;
+    /* ===== HERO ===== */
+    .hero {
+      padding: 48px 0 40px; text-align: center;
       position: relative; overflow: hidden;
     }
-    .hero-card::before {
+    .hero::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      background: linear-gradient(90deg, var(--red), var(--yellow), var(--orange));
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(253,198,58,0.08) 0%, transparent 100%);
+      pointer-events: none;
     }
-    .mini-search {
-      background: var(--cream); border: 1px solid var(--cream-dark); border-radius: var(--radius);
-      padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 20px;
-    }
-    .mini-search strong { color: var(--dark); font-size: 15px; }
-    .mini-search span { color: var(--dark-light); font-size: 14px; }
-    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
-    .chip {
-      padding: 8px 14px; border-radius: 999px; background: white;
-      border: 1px solid var(--cream-dark); font-size: 13px; color: var(--dark);
-      font-weight: 600;
-      transition: all 0.2s ease;
-    }
-    .chip:hover { border-color: var(--red); color: var(--red); }
-    .preview-list { display: grid; gap: 12px; }
-    .spot {
-      display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center;
-      background: var(--cream); border: 1px solid var(--cream-dark); border-radius: var(--radius); padding: 14px;
-      transition: all 0.2s ease;
-    }
-    .spot:hover { border-color: var(--red); box-shadow: var(--shadow-sm); }
-    .spot-img {
-      width: 56px; height: 56px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--red) 0%, var(--orange) 100%);
-      display: grid; place-items: center;
-      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: white;
-    }
-    .spot h3 { font-size: 15px; margin-bottom: 4px; font-weight: 600; }
-    .spot p { color: var(--dark-light); font-size: 13px; }
-    .pill-rating {
-      padding: 8px 12px; border-radius: var(--radius-sm); background: var(--yellow);
-      color: var(--dark); font-size: 12px; font-weight: 700; white-space: nowrap;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Stats */
-    .stats { padding: 16px 0 64px; }
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-    }
-    .stat {
-      background: white; border: 1px solid var(--cream-dark); border-radius: var(--radius);
-      padding: 28px; box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-    .stat:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .stat-number {
-      display: block; font-family: 'JetBrains Mono', monospace;
-      font-size: 32px; font-weight: 700; color: var(--red);
-      line-height: 1; margin-bottom: 10px;
-    }
-    .stat span { color: var(--dark-light); font-size: 14px; font-weight: 500; }
-
-    /* Sections */
-    .section { padding: 48px 0; }
-    .section-head { margin-bottom: 32px; }
-    .section-head h2 {
+    .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -0.02em;
-      margin-bottom: 12px;
+      font-weight: 800; font-size: clamp(32px, 6vw, 56px);
+      color: var(--dark); line-height: 1.1;
     }
-    .section-head p { color: var(--dark-light); max-width: 600px; font-size: 16px; }
+    .hero h1 span { color: var(--red); }
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--dark-light); margin-top: 8px;
+      font-weight: 400;
+    }
+    .hero-mountain {
+      margin: 24px auto 0;
+      font-size: 48px; opacity: 0.5;
+      line-height: 1; user-select: none;
+    }
 
-    /* Features */
-    .features {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    /* ===== SEARCH ===== */
+    .search-wrap {
+      max-width: 560px; margin: 24px auto 0;
+      display: flex; gap: 0; position: relative;
     }
-    .feature {
-      background: white; border: 1px solid var(--cream-dark); border-radius: var(--radius-lg);
-      padding: 32px; box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
+    .search-wrap input {
+      flex: 1; padding: 14px 20px; border: 2px solid var(--cream-dark);
+      border-radius: var(--radius) 0 0 var(--radius);
+      font-size: 16px; font-family: inherit;
+      outline: none; background: var(--white);
+      transition: 0.2s;
     }
-    .feature:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .feature-icon {
-      width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
-      background: var(--yellow); margin-bottom: 20px;
-      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; color: var(--dark);
+    .search-wrap input:focus { border-color: var(--red); }
+    .search-wrap button {
+      padding: 14px 24px; background: var(--red); color: var(--white);
+      border: none; border-radius: 0 var(--radius) var(--radius) 0;
+      font-weight: 600; font-size: 15px; cursor: pointer;
+      transition: 0.2s; white-space: nowrap;
     }
-    .feature h3 { font-size: 20px; margin-bottom: 10px; font-weight: 700; }
-    .feature p { color: var(--dark-light); font-size: 15px; line-height: 1.7; }
+    .search-wrap button:hover { background: var(--red-dark); }
 
-    /* Listings */
-    .listings {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    /* ===== STATS ===== */
+    .stats {
+      display: flex; justify-content: center; gap: 48px;
+      padding: 40px 0; margin-top: 24px;
+      border-top: 1px solid var(--cream-dark);
+      flex-wrap: wrap;
     }
-    .listing {
-      background: white; border: 1px solid var(--cream-dark); border-radius: var(--radius-lg);
-      overflow: hidden; box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 28px; font-weight: 700; color: var(--red);
     }
-    .listing:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .listing-top {
-      min-height: 160px; padding: 20px; display: flex; align-items: start; justify-content: space-between;
-      background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
-    }
-    .listing-badge {
-      padding: 8px 12px; border-radius: 999px; font-size: 11px; font-weight: 700;
-      background: var(--red); color: white;
-      text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .listing-initial {
-      font-family: 'Playfair Display', serif; font-weight: 800; font-size: 48px;
-      color: var(--red); opacity: 0.3;
-    }
-    .listing-body { padding: 24px; }
-    .listing-body h3 { font-size: 20px; margin-bottom: 12px; font-weight: 700; }
-    .listing-meta { color: var(--dark-light); font-size: 14px; display: grid; gap: 8px; margin-bottom: 20px; }
-    .listing-meta span { display: flex; align-items: center; gap: 8px; }
-    .listing-actions { display: flex; gap: 12px; }
-    .listing-actions .btn { flex: 1; padding: 14px 16px; font-size: 14px; }
-    .btn-wa { background: #25D366; color: white; }
-    .btn-wa:hover { filter: brightness(0.95); }
+    .stat-label { font-size: 14px; color: var(--dark-light); }
 
-    /* Owner Section */
-    .owner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-      background: var(--dark);
-      color: white; padding: 40px; border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg);
-    }
-    .owner p { color: rgba(255,255,255,0.75); line-height: 1.7; }
-    .owner-points { display: grid; gap: 12px; margin-top: 20px; }
-    .owner-points span {
-      display: inline-flex; align-items: center; gap: 12px; padding: 14px 16px;
-      border-radius: var(--radius-sm); background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-weight: 500;
-    }
-    .pricing {
-      background: rgba(255,255,255,0.06); border-radius: var(--radius); padding: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .pricing h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 4px; }
-    .pricing ul { list-style: none; display: grid; gap: 14px; margin-top: 20px; }
-    .pricing li {
-      display: flex; justify-content: space-between; gap: 16px; padding-bottom: 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .pricing li:last-child { border-bottom: none; padding-bottom: 0; }
-    .price-tag { font-weight: 700; color: var(--yellow); font-family: 'JetBrains Mono', monospace; }
-
-    /* CTA Box */
-    .cta-box {
-      background: white; border: 1px solid var(--cream-dark); border-radius: var(--radius-lg);
-      padding: 40px; text-align: center; box-shadow: var(--shadow-sm);
-    }
-    .cta-box h2 {
+    /* ===== SECTION TITLE ===== */
+    .section-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 3vw, 32px); margin-bottom: 12px;
+      font-weight: 700; font-size: clamp(24px, 3vw, 36px);
+      color: var(--dark); text-align: center;
+      margin-bottom: 8px;
     }
-    .cta-box p { color: var(--dark-light); max-width: 600px; margin: 0 auto 28px; font-size: 16px; }
+    .section-sub {
+      text-align: center; color: var(--dark-light);
+      margin-bottom: 32px; font-size: 16px;
+    }
 
-    /* Footer */
+    /* ===== FEATURED / MASONRY GRID ===== */
+    .masonry {
+      columns: 3; column-gap: 16px;
+      padding-bottom: 60px; break-inside: avoid;
+    }
+    @media (max-width: 860px) { .masonry { columns: 2; } }
+    @media (max-width: 520px) { .masonry { columns: 1; } }
+
+    .card {
+      break-inside: avoid; margin-bottom: 16px;
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow);
+      transition: 0.25s; cursor: pointer;
+      border: 1px solid var(--cream-dark);
+    }
+    .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .card-img {
+      width: 100%; display: block;
+      background: var(--cream-dark);
+      aspect-ratio: auto;
+    }
+    .card-img-tall { aspect-ratio: 3/4; }
+    .card-img-square { aspect-ratio: 1; }
+    .card-img-wide { aspect-ratio: 16/10; }
+    .card-body { padding: 14px 16px 16px; }
+    .card-badge {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .badge-featured { background: var(--yellow); color: var(--dark); }
+    .badge-premium { background: var(--orange); color: var(--white); }
+    .badge-new { background: #E8F5E9; color: #2E7D32; }
+    .card h3 {
+      font-size: 18px; font-weight: 700; color: var(--dark);
+      margin: 2px 0 4px;
+    }
+    .card p {
+      font-size: 14px; color: var(--dark-light);
+      line-height: 1.5;
+    }
+    .card-meta {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 10px; font-size: 13px; color: var(--dark-light);
+    }
+    .card-wa {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green); color: var(--white);
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 13px; font-weight: 600; margin-top: 10px;
+      transition: 0.2s; width: fit-content;
+    }
+    .card-wa:hover { opacity: 0.85; }
+    .card-area {
+      font-size: 12px; color: var(--dark-light);
+      background: var(--cream); padding: 3px 10px;
+      border-radius: 20px; display: inline-block;
+    }
+
+    /* ===== REGION FILTER ===== */
+    .regions {
+      display: flex; gap: 10px; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 32px;
+    }
+    .region-pill {
+      padding: 8px 18px; border-radius: 20px;
+      border: 1.5px solid var(--cream-dark);
+      font-size: 14px; font-weight: 500; cursor: pointer;
+      transition: 0.2s; background: var(--white);
+    }
+    .region-pill:hover, .region-pill.active {
+      border-color: var(--red); background: #FFF5F5; color: var(--red);
+    }
+
+    /* ===== INSTAGRAM FEED ===== */
+    .ig-section {
+      background: var(--white); padding: 48px 0;
+      border-top: 2px solid var(--cream-dark);
+    }
+    .ig-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 8px; border-radius: var(--radius); overflow: hidden;
+    }
+    @media (max-width: 640px) { .ig-grid { grid-template-columns: repeat(2, 1fr); } }
+    .ig-item {
+      aspect-ratio: 1; background: var(--cream-dark);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--dark-light); font-size: 14px;
+      position: relative; overflow: hidden;
+    }
+    .ig-item .ig-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      color: white; padding: 24px 12px 8px;
+      font-size: 12px; opacity: 0; transition: 0.3s;
+    }
+    .ig-item:hover .ig-label { opacity: 1; }
+    .ig-cta {
+      text-align: center; margin-top: 24px;
+    }
+    .ig-cta a {
+      font-weight: 600; color: var(--red);
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+
+    /* ===== FOOTER ===== */
     .footer {
-      padding: 40px 0 48px; color: var(--dark-light); font-size: 14px;
+      background: var(--dark); color: rgba(255,255,255,0.7);
+      padding: 40px 0; text-align: center;
     }
-    .footer-inner {
-      display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
-      border-top: 1px solid var(--cream-dark); padding-top: 24px;
-    }
-    .footer-brand {
+    .footer-logo {
       font-family: 'Playfair Display', serif;
-      font-weight: 700; color: var(--red); font-size: 18px;
+      font-weight: 700; font-size: 24px; color: var(--white);
     }
-    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-links a:hover { color: var(--red); }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hero-card { max-width: 480px; }
-      .features, .listings { grid-template-columns: repeat(2, 1fr); }
+    .footer p { font-size: 14px; margin-top: 8px; line-height: 1.8; }
+    .footer-sosmed { display: flex; gap: 16px; justify-content: center; margin: 16px 0; }
+    .footer-sosmed a {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 18px; transition: 0.2s;
     }
+    .footer-sosmed a:hover { background: var(--red); }
+    .footer-line { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 24px 0; }
+    .footer small { font-size: 12px; color: rgba(255,255,255,0.4); }
 
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero { padding-top: 48px; }
-      .container { width: min(1200px, calc(100% - 24px)); }
-      .features, .listings { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .owner { grid-template-columns: 1fr; padding: 28px; }
-      .section-head h2 { font-size: 28px; }
-      .btn { padding: 14px 22px; }
+    /* ===== CTA SELL ===== */
+    .cta-umkm {
+      background: linear-gradient(135deg, var(--dark) 0%, #0D1B2A 100%);
+      padding: 48px 0; color: var(--white); text-align: center;
     }
-
-    @media (max-width: 480px) {
-      .hero { padding-top: 32px; }
-      .hero-actions { flex-direction: column; }
-      .hero-actions .btn { width: 100%; }
-      .stats-grid { grid-template-columns: 1fr; }
-      .stat { padding: 20px; }
-      .stat-number { font-size: 28px; }
-      .listing-actions { flex-direction: column; }
-      .listing-actions .btn { width: 100%; }
-      .owner { padding: 20px; }
-      .cta-box { padding: 28px 20px; }
-      .cta-box .hero-actions { flex-direction: column; }
-      .cta-box .hero-actions .btn { width: 100%; }
+    .cta-umkm h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3vw, 36px); font-weight: 700;
     }
+    .cta-umkm p { color: rgba(255,255,255,0.7); margin: 12px 0 24px; }
+    .cta-umkm .nav-btn { font-size: 16px; padding: 14px 32px; }
 
-    /* Animations */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero > .container > div:first-child { animation: fadeInUp 0.6s ease-out; }
-    .hero-card { animation: fadeInUp 0.6s ease-out 0.2s both; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero > .container > div:first-child,
-      .hero-card { animation: none; }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .nav { gap: 12px; }
+      .nav a { font-size: 12px; }
+      .stats { gap: 24px; }
+      .search-wrap { flex-direction: column; }
+      .search-wrap input { border-radius: var(--radius); }
+      .search-wrap button { border-radius: var(--radius); }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== HEADER ===== -->
   <header class="header">
-    <div class="container nav">
-      <a class="brand" href="#top">
-        <span class="brand-mark">KL</span>
-        <span>KulinerLumajang.id</span>
+    <div class="wrap header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">KL</span>
+        Kuliner Lumajang
       </a>
-      <nav class="nav-links">
-        <a href="#fitur">Fitur</a>
-        <a href="#contoh">Contoh Kuliner</a>
-        <a href="#pemilik">Untuk Pemilik Usaha</a>
+      <nav class="nav">
+        <a href="#kuliner">Kuliner</a>
+        <a href="#viral">Viral</a>
+        <a href="#feed">IG</a>
+        <a href="#daftar" class="nav-btn">+ Daftar UMKM</a>
       </nav>
-      <a class="nav-cta" href="#daftar">Daftar Usaha</a>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Direktori kuliner khusus Lumajang</div>
-          <h1>Temukan kuliner enak di Lumajang, lalu langsung chat penjualnya.</h1>
-          <p class="lead">KulinerLumajang.id membantu warga dan wisatawan menemukan warung, restoran, dan jajanan lokal dengan cepat — lengkap dengan lokasi, jam buka, kisaran harga, dan tombol WhatsApp.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#contoh">Lihat Contoh Kuliner</a>
-            <a class="btn btn-secondary" href="#pemilik">Saya Punya Usaha</a>
-          </div>
-          <div class="hero-meta">
-            <span>Fokus lokal Lumajang</span>
-            <span>Langsung chat ke WhatsApp</span>
-            <span>Mudah dicoba dan cepat dipakai</span>
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <div class="mini-search">
-            <strong>Cari kuliner</strong>
-            <span>Sate, bakso, kopi...</span>
-          </div>
-          <div class="chip-row">
-            <span class="chip">Sate</span>
-            <span class="chip">Bakso</span>
-            <span class="chip">Nasi Pecel</span>
-            <span class="chip">Kopi</span>
-          </div>
-          <div class="preview-list">
-            <div class="spot">
-              <div class="spot-img">SK</div>
-              <div>
-                <h3>Sate Pak Karso</h3>
-                <p>Jl. Ahmad Yani | Rp20-35rb | Buka 10.00-22.00</p>
-              </div>
-              <div class="pill-rating">4.8</div>
-            </div>
-            <div class="spot">
-              <div class="spot-img">ND</div>
-              <div>
-                <h3>Nasi Pecel Mbok Darmi</h3>
-                <p>Jl. PB Sudirman | Rp12-18rb | Buka pagi</p>
-              </div>
-              <div class="pill-rating">4.7</div>
-            </div>
-            <div class="spot">
-              <div class="spot-img">KT</div>
-              <div>
-                <h3>Kopi Tumpuk Lumajang</h3>
-                <p>Area kota | Tempat nongkrong | Cocok WFC</p>
-              </div>
-              <div class="pill-rating">HITS</div>
-            </div>
-          </div>
-        </div>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="wrap">
+      <h1>Lagi <span>ngidol</span> tapi<br>bungah ning ndi?</h1>
+      <p class="hero-sub">
+        Kumpulan kuliner enak nang Lumajang. Seng takok-takok lang rabi mumet,<br>
+        langsung tek WA penjual'e. Gae, lur!
+      </p>
+      <div class="search-wrap">
+        <input type="text" placeholder="Nggoleki opo? Coba 'bakso', 'kopi', 'sego'" />
+        <button>Goleki</button>
       </div>
-    </section>
+      <div class="hero-mountain">🏔️</div>
+    </div>
+  </section>
 
-    <section class="stats">
-      <div class="container stats-grid">
-        <div class="stat"><span class="stat-number">3</span><span>Langkah dari cari kuliner sampai chat penjual</span></div>
-        <div class="stat"><span class="stat-number">100%</span><span>Fokus kuliner lokal, bukan direktori umum</span></div>
-        <div class="stat"><span class="stat-number">WA</span><span>Langsung chat ke WhatsApp penjual</span></div>
-        <div class="stat"><span class="stat-number">&lt;5m</span><span>Cocok untuk mulai tes market dengan sederhana</span></div>
+  <!-- ===== STATS ===== -->
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-num">37</div>
+        <div class="stat-label">Kuliner kedaftar</div>
       </div>
-    </section>
-
-    <section class="section" id="fitur">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Kenapa ini menarik buat warga dan UMKM?</h2>
-            <p>Bukan sekadar daftar tempat makan. Halaman ini dirancang supaya pengunjung cepat paham manfaatnya, sementara pemilik usaha langsung melihat alasan untuk ikut daftar.</p>
-          </div>
-        </div>
-
-        <div class="features">
-          <article class="feature">
-            <div class="feature-icon">01</div>
-            <h3>Temukan lebih cepat</h3>
-            <p>Pengunjung bisa cari berdasarkan jenis makanan, lokasi, harga, dan rekomendasi tanpa harus scroll Instagram atau tanya grup WhatsApp.</p>
-          </article>
-          <article class="feature">
-            <div class="feature-icon">02</div>
-            <h3>Langsung ke WhatsApp</h3>
-            <p>CTA utama langsung menghubungkan pembeli ke penjual. Sederhana, cocok untuk kebiasaan transaksi UMKM lokal.</p>
-          </article>
-          <article class="feature">
-            <div class="feature-icon">03</div>
-            <h3>Tempat promosi UMKM</h3>
-            <p>Pemilik usaha bisa tampil gratis, lalu upgrade ke Premium atau Featured untuk visibilitas lebih tinggi saat traffic mulai masuk.</p>
-          </article>
-        </div>
+      <div class="stat-item">
+        <div class="stat-num">120+</div>
+        <div class="stat-label">Wong nge-WA saban minggu</div>
       </div>
-    </section>
-
-    <section class="section" id="contoh">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Contoh tampilan kuliner yang bisa ditampilkan</h2>
-            <p>Untuk landing page awal, cukup tampilkan beberapa contoh listing unggulan. Nanti setelah traffic mulai masuk dan UMKM bertambah, halaman ini bisa dikembangkan menjadi direktori yang lebih lengkap.</p>
-          </div>
-        </div>
-
-        <div class="listings">
-          <article class="listing">
-            <div class="listing-top">
-              <span class="listing-badge">Featured</span>
-              <span class="listing-initial">SK</span>
-            </div>
-            <div class="listing-body">
-              <h3>Sate Sapi Pak Karso</h3>
-              <div class="listing-meta">
-                <span>Jl. Ahmad Yani No. 45</span>
-                <span>Rp20.000 - Rp35.000</span>
-                <span>10.00 - 22.00</span>
-              </div>
-              <div class="listing-actions">
-                <a class="btn btn-wa" href="#">Chat WhatsApp</a>
-                <a class="btn btn-secondary" href="#">Lihat Maps</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="listing">
-            <div class="listing-top">
-              <span class="listing-badge" style="background: var(--orange);">Premium</span>
-              <span class="listing-initial">ND</span>
-            </div>
-            <div class="listing-body">
-              <h3>Nasi Pecel Mbok Darmi</h3>
-              <div class="listing-meta">
-                <span>Jl. PB Sudirman No. 23</span>
-                <span>Rp12.000 - Rp18.000</span>
-                <span>06.00 - 14.00</span>
-              </div>
-              <div class="listing-actions">
-                <a class="btn btn-wa" href="#">Chat WhatsApp</a>
-                <a class="btn btn-secondary" href="#">Lihat Maps</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="listing">
-            <div class="listing-top">
-              <span class="listing-badge" style="background: var(--yellow); color: var(--dark);">Lagi Dicari</span>
-              <span class="listing-initial">KT</span>
-            </div>
-            <div class="listing-body">
-              <h3>Kopi Tumpuk Lumajang</h3>
-              <div class="listing-meta">
-                <span>Area kota Lumajang</span>
-                <span>Rp15.000 - Rp28.000</span>
-                <span>16.00 - 23.00</span>
-              </div>
-              <div class="listing-actions">
-                <a class="btn btn-wa" href="#">Chat WhatsApp</a>
-                <a class="btn btn-secondary" href="#">Lihat Maps</a>
-              </div>
-            </div>
-          </article>
-        </div>
+      <div class="stat-item">
+        <div class="stat-num">7K</div>
+        <div class="stat-label">Followers IG</div>
       </div>
-    </section>
-
-    <section class="section" id="pemilik">
-      <div class="container owner">
-        <div>
-          <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 16px;">Untuk pemilik warung dan restoran</h2>
-          <p>KulinerLumajang.id bisa jadi kanal promosi tambahan yang lebih terstruktur daripada feed sosial media biasa. Fokusnya: bantu orang menemukan usaha kamu lalu langsung menghubungi via WhatsApp.</p>
-          <div class="owner-points">
-            <span>Listing gratis untuk mulai ikut tampil</span>
-            <span>Premium badge untuk tingkatkan kepercayaan</span>
-            <span>Featured banner untuk promosi yang paling menonjol</span>
-          </div>
-        </div>
-        <div class="pricing">
-          <h3>Contoh model monetisasi</h3>
-          <ul>
-            <li><span>Free Listing</span><span class="price-tag">Mulai gratis</span></li>
-            <li><span>Premium Badge</span><span class="price-tag">Rp50rb/bulan</span></li>
-            <li><span>Featured Banner</span><span class="price-tag">Rp150rb/bulan</span></li>
-          </ul>
-          <div style="margin-top: 20px;">
-            <a class="btn btn-secondary" style="background:white; color:var(--red); width:100%; border-color: white;" href="#daftar">Saya Mau Daftar Usaha</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="daftar">
-      <div class="container cta-box">
-        <h2>Mulai dari landing page sederhana, lalu tumbuh ke direktori penuh</h2>
-        <p>Versi ini cocok untuk tahap awal: jelas, meyakinkan, dan tidak terlalu ramai. Setelah ada trafik dan beberapa UMKM bergabung, baru kita kembangkan ke halaman direktori penuh seperti mockup yang sudah kamu punya.</p>
-        <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
-          <a class="btn btn-primary" href="#">Aktifkan Landing Page</a>
-          <a class="btn btn-secondary" href="#contoh">Lihat Preview Listing</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>
-        <div class="footer-brand">KulinerLumajang.id</div>
-        <div style="margin-top: 8px;">Direktori kuliner lokal untuk warga dan UMKM Lumajang.</div>
-      </div>
-      <div class="footer-links">
-        <a href="#fitur">Fitur</a>
-        <a href="#contoh">Contoh Kuliner</a>
-        <a href="#pemilik">Untuk UMKM</a>
+      <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Kecamatan</div>
       </div>
     </div>
+  </div>
+
+  <!-- ===== KULINER MASONRY ===== -->
+  <div class="wrap" id="kuliner">
+    <h2 class="section-title">Peninggi Weteng nang Kene</h2>
+    <p class="section-sub">Gae wae goleki, ono seng nggo jajan, ono seng nggo mangan keluarga</p>
+
+    <div class="regions">
+      <span class="region-pill active">Kabeh</span>
+      <span class="region-pill">Lumajang Kota</span>
+      <span class="region-pill">Jatiroto</span>
+      <span class="region-pill">Yosowilangun</span>
+      <span class="region-pill">Sukodono</span>
+      <span class="region-pill">Senduro</span>
+      <span class="region-pill">Klakah</span>
+    </div>
+
+    <div class="masonry">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="card-img card-img-tall" style="background: linear-gradient(135deg, #FF6B6B, #C1121F); display:flex; align-items:flex-end; padding:16px; color:white; font-weight:700; font-size:24px;">🌶️</div>
+        <div class="card-body">
+          <span class="card-badge badge-featured">🔥 Featured</span>
+          <h3>Batagor 73</h3>
+          <p>Batagor gede-gede, sambel'e pedes sampe nangis. Nang jero kota, gampang golek'e.</p>
+          <div class="card-meta">
+            <span>📍 Lumajang Kota</span>
+            <span>⭐ 4.8</span>
+          </div>
+          <a href="#" class="card-wa">💬 Chat WA</a>
+        </div>
+      </div>
+
+      <!-- Card 2 - Wide -->
+      <div class="card">
+        <div class="card-img card-img-wide" style="background: linear-gradient(90deg, #FB8500, #FFB703); display:flex; align-items:center; justify-content:center; color:white; font-size:28px;">☕</div>
+        <div class="card-body">
+          <span class="card-badge badge-new">Anyar</span>
+          <h3>Royal Cafe</h3>
+          <p>Nongkrong enak, Wi-Fi banter, cocok nggo remote work. Nasgor'e juara!</p>
+          <div class="card-meta"><span>📍 Lumajang Kota</span><span>⭐ 4.5</span></div>
+          <a href="#" class="card-wa">💬 Chat WA</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="card-img card-img-square" style="background: linear-gradient(135deg, #1D3557, #2B3A55); display:flex; align-items:center; justify-content:center; color:white; font-size:32px;">🍜</div>
+        <div class="card-body">
+          <span class="card-badge badge-premium">⭐ Premium</span>
+          <h3>Maonicamp</h3>
+          <p>Indomie nyemek campur sosis, endok, keju — pokok'e maknyus! Wajib cobo.</p>
+          <div class="card-meta"><span>📍 Jatiroto</span><span>⭐ 4.7</span></div>
+          <a href="#" class="card-wa">💬 Chat WA</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <div class="card-img card-img-square" style="background: linear-gradient(90deg, #E63946, #FFB703); display:flex; align-items:center; justify-content:center; color:white; font-size:28px;">🥟</div>
+        <div class="card-body">
+          <h3>Sumtime Dimsum</h3>
+          <p>Dimsum homade, porsi gede, rega ramah nang dompet. Cocok nggo cemilan.</p>
+          <div class="card-meta"><span>📍 Sukodono</span><span>⭐ 4.6</span></div>
+          <a href="#" class="card-wa">💬 Chat WA</a>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <div class="card-img card-img-tall" style="background: linear-gradient(180deg, #25D366, #1DA851); display:flex; align-items:flex-start; justify-content:flex-end; padding:12px; color:white; font-size:28px;">🥤</div>
+        <div class="card-body">
+          <h3>DJAGO IRENK</h3>
+          <p>Es kopi susu kekinian — anak muda Lumajang pada ngumpul nang kene.</p>
+          <div class="card-meta"><span>📍 Lumajang Kota</span><span>⭐ 4.4</span></div>
+          <a href="#" class="card-wa">💬 Chat WA</a>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <div class="card-img card-img-wide" style="background: linear-gradient(135deg, #FFB703, #FB8500); display:flex; align-items:center; justify-content:center; color:white; font-size:32px;">🍚</div>
+        <div class="card-body">
+          <span class="card-badge badge-featured">🔥 Featured</span>
+          <h3>Sego Empal Bu As</h3>
+          <p>Empal sapi empuk, bumbu kecap legit. Porsi ndeso — mangan sak weteng!</p>
+          <div class="card-meta"><span>📍 Yosowilangun</span><span>⭐ 4.9</span></div>
+          <a href="#" class="card-wa">💬 Chat WA</a>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="card">
+        <div class="card-img card-img-square" style="background: linear-gradient(135deg, #2B3A55, #1D3557); display:flex; align-items:center; justify-content:center; color:white; font-size:30px;">🍢</div>
+        <div class="card-body">
+          <span class="card-badge badge-new">Anyar</span>
+          <h3>Sate Kambing Paklek</h3>
+          <p>Bakar langsung, bumbu kecap pedes, empuk ora alot. Enak tenan!</p>
+          <div class="card-meta"><span>📍 Senduro</span><span>⭐ 4.8</span></div>
+          <a href="#" class="card-wa">💬 Chat WA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VIRAL SECTION ===== -->
+  <div class="cta-umkm" id="viral">
+    <div class="wrap">
+      <h2>🌋 Lagi Viral nang Kene</h2>
+      <p>Wong Lumajang pada ngomong-ngomong opo dino iki? Cek pos-pos seng lagi rame!</p>
+      <a href="#" class="nav-btn">Deleng Kabeh →</a>
+    </div>
+  </div>
+
+  <!-- ===== INSTAGRAM FEED ===== -->
+  <section class="ig-section" id="feed">
+    <div class="wrap">
+      <h2 class="section-title">@kulinerlumajangan</h2>
+      <p class="section-sub">Cerita kuliner langsung nang IG — follow ben ora ketinggalan!</p>
+      <div class="ig-grid">
+        <div class="ig-item" style="background:linear-gradient(135deg,#E63946,#FB8500);">
+          <div style="font-size:32px;">🍕</div>
+          <div class="ig-label">Batagor 73 — enak tenan 👍</div>
+        </div>
+        <div class="ig-item" style="background:linear-gradient(45deg,#FFB703,#FB8500);">
+          <div style="font-size:32px;">🥤</div>
+          <div class="ig-label">DJAGO IRENK — nongkrong asik</div>
+        </div>
+        <div class="ig-item" style="background:linear-gradient(135deg,#1D3557,#2B3A55);">
+          <div style="font-size:32px;">☕</div>
+          <div class="ig-label">Royal Cafe — kerja nyaman</div>
+        </div>
+        <div class="ig-item" style="background:linear-gradient(45deg,#E63946,#FF6B6B);">
+          <div style="font-size:32px;">🥟</div>
+          <div class="ig-label">Sumtime Dimsum — lagi viral!</div>
+        </div>
+      </div>
+      <div class="ig-cta">
+        <a href="https://instagram.com/kulinerlumajangan" target="_blank">Deleng kabeh IG →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA UMKM ===== -->
+  <section class="cta-umkm" id="daftar">
+    <div class="wrap">
+      <h2>Nduwe warung / cafe?</h2>
+      <p>Ndaftar gratis, upgrade pas butuh. Wong golek mangan, golek'e nang kene.</p>
+      <a href="#" class="nav-btn" style="background:var(--yellow);color:var(--dark);">🗣️ Daftar UMKM</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-logo">🏔️ Kuliner Lumajang</div>
+      <p>Direktori kuliner nang kota Lumajang<br>Gae wong Lumajang, karo wong Lumajang</p>
+      <div class="footer-sosmed">
+        <a href="https://instagram.com/kulinerlumajangan" target="_blank" title="Instagram">📸</a>
+        <a href="https://tiktok.com/@kulinerlumajangan" target="_blank" title="TikTok">🎵</a>
+        <a href="#" title="WhatsApp">💬</a>
+      </div>
+      <hr class="footer-line" />
+      <small>© 2026 KulinerLumajang.id — Dibusana karo wong Lumajang asli</small>
+    </div>
   </footer>
+
 </body>
 </html>
